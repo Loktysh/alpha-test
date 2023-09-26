@@ -8,6 +8,7 @@ test.describe('UI tests', () => {
     await storePage.clearCart();
     await storePage.cardsContainer.waitFor({ state: 'visible' });
   });
+  
   test('Go to empty cart', async ({ page }) => {
     const storePage = new StorePage(page);
     await storePage.openCartPopup();
@@ -15,18 +16,21 @@ test.describe('UI tests', () => {
     await storePage.openCartPage();
     await expect(page).toHaveURL('/basket');
   });
+  
   test('Go to cart with 1 non-discounted item', async ({ page }) => {
     const storePage = new StorePage(page);
     await storePage.addProducts(1);
     await expect(storePage.cartCount).toHaveText('1');
     await storePage.checkCartFunctionality();
   });
+  
   test('Go to cart with 1 discounted item', async ({ page }) => {
     const storePage = new StorePage(page);
     await storePage.addProducts(1, true);
     await expect(storePage.cartCount).toHaveText('1');
     await storePage.checkCartFunctionality();
   });
+  
   test('Going to a cart with 9 different products', async ({ page }) => {
     const storePage = new StorePage(page);
     await storePage.addProducts(1, true);
@@ -52,6 +56,7 @@ test.describe('UI tests', () => {
     await expect(storePage.cartCount).toHaveText('9');
     await storePage.checkCartFunctionality();
   });
+  
   test('Go to a cart with 9 discounted products of the same name', async ({ page }) => {
     const storePage = new StorePage(page);
     await storePage.addProducts(9, true);
